@@ -1,0 +1,8 @@
+{  
+  "goods": [  
+      { "price": 45, "title": "有机里脊肉", "img": "static/images/img01.jpg", "quantity": 1 },  
+      { "price": 55, "title": "牛肋条", "img": "static/images/img02.jpg", "quantity": 2 },  
+      { "price": 65, "title": "智利肋排脆骨", "img": "static/images/img03.jpg", "quantity": 1 },  
+      { "price": 75, "title": "法国进口瘦肉", "img": "static/images/img04.jpg", "quantity": 1 }  
+  ]  
+}

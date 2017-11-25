@@ -1,0 +1,139 @@
+@actionSheetAlpha:   rgba(0, 0, 0, .5);
+
+// 默认效果从下往上
+
+.actionSheet{
+  //整体铺满屏幕 默认隐藏
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  visibility: hidden;
+  // 透明背景
+  .actionSheet_mask{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: @actionSheetAlpha;
+  }
+  // 内容
+  .actionSheet_content {
+    background-color: #fff;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    .actionSheet_scroll {
+      max-height: ~"calc(100vh - 15rem)";
+      overflow: auto;
+      .will_transform;
+      .touch();
+    }
+  }
+  // 显示
+  &.show {
+    .hiddens(show, @fadein_time);
+    // 遮罩层
+    .actionSheet_mask {
+      .fades(in, '', @fadein_time);
+    }
+    // 内容
+    .actionSheet_content {
+      .fades(in, bottom, @fadein_time);
+    }
+  }
+  // 隐藏
+  &.hidden {
+    //visibility: visible;
+    .hiddens(show, @fadein_time);
+    // 遮罩层
+    .actionSheet_mask {
+      .fades(out, '', @fadeout_time);
+    }
+    // 内容
+    .actionSheet_content {
+      .fades(out, bottom, @fadeout_time);
+    }
+  }
+}
+
+/******************************************************************************/
+.actionSheet.modal{
+  .display;
+  .align_items_center;
+  .actionSheet_content{
+    .display;
+    .justify_content_center;
+    width: 100%;
+    position: relative;
+    background: none;
+    .modal_box{
+      width: 80%;
+      max-width: 22rem;
+      min-width: 13rem;
+      border-radius: 0.5rem;
+      position: relative;
+      background-color: #fff;
+    }
+  }
+  &.show {
+    .actionSheet_content {
+      .fades(in, left, .3s);
+    }
+  }
+  &.hidden {
+    .actionSheet_content {
+      .fades(out, left, .3s);
+    }
+  }
+  /*弹出框标题*/
+  .modal_title{
+    font-size:1rem;
+    text-align:center;
+    line-height:2.5rem;
+    .user-name { margin: @margin 0 0 0;}
+  }
+  /*弹出框内容*/
+  .modal_content{
+    min-height: 10rem;
+    max-height: 18rem;
+    padding:0 @margin @margin @margin;
+    font-size:0.7rem;
+    line-height:1rem;
+    .touch();
+  }
+  /*弹出框按钮*/
+  a{
+    float:left;
+    width:49.8%;
+    padding:0.6rem 0;
+    position:relative;
+    text-align:center;
+    font-size:0.8rem;
+    &:after {
+      .hairline_scale(@border, top);
+    }
+    &:first-child:before{
+      .hairline_scale(@border, right);
+    }
+  }
+  /*弹出框的叉和虚线位于内容下方 水平居中*/
+  .modal_close{
+    position:absolute;
+    left:50%;
+    top:100%;
+    height:1rem;
+    border-left:1px dashed #fff;
+    i{
+      position:absolute;
+      top:100%;
+      font-size:2rem;
+      line-height:1;
+      color:#fff;
+      transform:translateX(-50%);
+    }
+  }
+}
+

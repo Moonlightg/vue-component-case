@@ -1,0 +1,131 @@
+/*
+ * menu.less
+ * v1.1.1 MIT License
+ * Copyright (c) 2017.6.26 Gjb
+ *
+*/
+// 首页菜单
+.menu {
+    .display;
+    .flex_flow;
+    background-color: #fff;
+    li {
+        .flex_initial(0 0 33.333333336%);
+        text-align: center;
+        position: relative;
+        /*&::after {
+            .hairline_scale(@border, bottom);
+        }
+        &::before {
+            .hairline_scale(@border, right);
+        }
+        &:nth-child(3n)::before {
+            display: none;
+        }*/
+        i {
+            font-size: @fs6 * 2;
+        }
+        p {
+            margin-top: @margin - .35em;
+            font-size: @fs6 + .05rem;
+        }
+        a {
+            display: block;
+            padding: 1.2rem 0;
+            &.hover {
+                background-color: rgba(242, 137, 76, .05);
+            }
+            // 添加，删减常用应用 操作按钮
+            span{
+                position: absolute;
+                top: @fs8 - .3rem;
+                right: @fs8 - .3rem;
+                width: @fs8;
+                height: @fs8;
+                border-radius: @fs8;
+                background: @brand_secondary;
+                color: #fff;
+                .display;
+                .justify_content_center;
+                .align_items_center;
+                i{font-size: @fs6;}
+            }
+        }
+    }
+    // 编辑应用
+    &.set{
+        li{
+            //a{ background: @body_bg; .transition(all .5s ease-in-out);}
+            &.added a span{ background: @brand_default;}
+        }
+    }
+    &.common{
+        li a span{ background: @brand_danger;}
+    }
+}
+.menu_box{
+    .display;
+    .flex_direction(column);
+    .flex;
+    position: relative;
+    overflow: hidden;
+    .window_box{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    h2{
+        .display;
+        .align_items_center;
+        padding: 0 .5rem;
+        font-size: @fs6 + .1rem;
+        font-weight: normal;
+        line-height: 2rem;
+        margin-top: .4rem;
+        color: @brand_black;
+    }
+    .menu{
+        position: relative;
+        &::after{
+            .hairline_scale(@border, bottom);
+        }
+        &::before{
+            .hairline_scale(@border, top);
+        }
+        li{
+            a{
+                .border(@c:#fff);
+                span{
+                    @w:.8rem;
+                    position: absolute;
+                    top: .5rem;
+                    right: .5rem;
+                    width: @w; 
+                    height: @w; 
+                    line-height: initial;
+                    border-radius: @w; 
+                    background: #39cf4b; 
+                    color: #fff; 
+                    font-size: .65rem; 
+                    text-align: center; 
+                    i{
+                        font-size: @fs6 - .35rem;
+                    }
+                } 
+            }
+            &.added{
+                span{
+                    background: #ddd; 
+                } 
+            }
+        }
+        &.set{
+            li{
+                a{.border(@w:.5px,@c:#ddd);}
+            }
+        }
+    }
+}
