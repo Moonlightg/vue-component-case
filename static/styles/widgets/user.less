@@ -1,0 +1,206 @@
+/*
+ * user.less
+ * v1.1.1 MIT License
+ * Copyright (c) 2017.6.29 Gjb
+ *
+*/
+//包装容器
+.user-wrapper{
+    .display;
+    .justify_content_center;
+    margin: @margin*2 0 @margin;
+}
+.user-info{
+    text-align: center;
+    h1{
+        font-size: 1rem;
+        margin-bottom: @margin;
+    }
+    p{
+        width: 60%;
+        margin: 0 auto;
+        padding-top: .5rem;
+        text-align: left;
+        font-size: @fs7;
+        color: @brand_default;
+    }
+}
+//默认头像规格
+.user-w (@w:1.8rem) {
+    width: @w;
+    height: @w;
+    font-size: @w / 2.8;
+    .border_radius(@w); 
+}
+//默认头像
+.user-name {
+    display: inline-flex;
+    .user-w();
+    .align_items_center;
+    .justify_content_center;
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+    font-weight: 400;
+    margin: 0 .5rem 0 0;
+    &.user-img{
+        background: none;
+    }
+    img{ width: 100%;}
+    .t-img{
+        width: 100%;
+        img{ width: 100%;}
+    }
+    &:active,&:hover{
+        color: white;
+    }
+    // 文字头像颜色
+    &.color0 { background: @brand_primary;}
+    &.color2 { background: @brand_warning;}
+    &.color3 { background: @brand_danger;}
+    &.color4 { background: #ecb833;}
+    &.color5 { background: #755299;}
+    &.color6 { background: @brand_secondary;}
+    &.color7 { background: #2eb2ba;}
+    &.color8 { background: #d863cd;}
+}
+//小号头像
+.user_s{
+    .user-w (@user_s);
+}
+//中号头像
+.user_m{
+    .user-w (@user_m);
+}
+//大号头像
+.user_l{
+    .user-w (@user_l)
+}
+//加大号头像
+.user_xl{
+    .user-w (@user_xl)
+}
+.user-card{ 
+    position: absolute; 
+    width: 80%; 
+    padding: 10px;
+    background-color: #fff; 
+    z-index: 1000; 
+    top: 30%; 
+    left: 10%; 
+    .border_radius(3px); 
+    box-shadow: 0px 0px 10px #444;
+    .card-content{
+        position: relative;
+        .display;
+        .flex_direction();
+        .justify_content(start);
+        p{
+            font-size: @fs7;
+            color: @brand_default;
+            margin-top: .3rem;
+            &.c-c-h{
+                color: #333;
+            }
+        }
+    }
+    .card-btn{
+        margin-top: .5rem;
+        .display;
+        .justify_content(end);
+    }
+}
+
+//用户头像设置
+.user-set{
+    position: relative;
+    background: #fff; 
+    text-align: center;
+    padding: @margin;
+    &::after{
+        .hairline_scale(@border, bottom);
+    }
+    button{
+        margin-bottom: 1.5rem;
+    }
+}
+.user-content{ 
+    .display;
+    .align_items_center;
+    .justify_content_center;
+    .user-name{
+        margin: 0 0 @margin;
+    }
+}
+.user-type { 
+    margin: @margin;
+    overflow: hidden;
+    .ut{ 
+        position: relative; 
+        width: 5rem; 
+        float: left; 
+        text-align: center;
+        .user-name{ 
+            margin: 10px auto; 
+        }
+        span{
+            display: inline-block; 
+            font-size: @fs7; 
+            color: @brand_default;
+        }
+        i{ display: none;}
+        &.pitch i{
+            position: absolute; 
+            color: white; 
+            right: 10px;
+            background: #09e56e; 
+            .border_radius(50%); 
+            padding: .15rem; 
+            font-size: @fs6; 
+            display: block;
+        }
+    }
+}
+
+// 用户成员组
+.user-box{
+    .display;
+    .flex_flow;
+    padding: .25rem 0;
+    background-color: #fff;
+    .user-this{
+        width: 20%;
+        text-align: center;
+        .user-name{
+            margin: .25rem;
+        }
+        p{
+            font-size: @fs6;
+            margin-bottom: .25rem;
+        }
+    }
+}
+// 用户卡片资料
+.user-dl{
+    li{
+        display: inline-flex;
+        .flex_direction();
+        min-height: 2rem;
+        box-sizing: border-box;
+        position:relative;
+        width: 100%;
+        .align_items_center;
+        .item_icon{
+            .display;
+            .align_items_center;
+            margin-right: @margin;
+            i {
+              font-size:1rem;
+            }
+        }
+          .item_tit{
+            font-size: @fs7;
+            color:@brand_default;
+        }
+    }
+}
