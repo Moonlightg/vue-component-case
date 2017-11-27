@@ -18,7 +18,7 @@
         </li>
         <li>
           <router-link :to="{path: 'case/baseline/index'}" v-waves>
-            <i class="icon-favor"/>
+            <i class="icon-reduce"/>
             <p>baseline</p>
           </router-link>
         </li>
