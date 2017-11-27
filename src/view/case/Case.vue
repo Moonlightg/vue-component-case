@@ -16,6 +16,12 @@
             <p>评分</p>
           </router-link>
         </li>
+        <li>
+          <router-link :to="{path: 'case/baseline/index'}" v-waves>
+            <i class="icon-favor"/>
+            <p>baseline</p>
+          </router-link>
+        </li>
       </nav>
     </div>
     <page-footer active-tab="案例"/>
