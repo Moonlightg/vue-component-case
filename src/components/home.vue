@@ -5,7 +5,7 @@
       <div class="user-wrapper">
         <a href="https://github.com/Moonlightg">
           <div class="user-name user_l">
-            <img src="https://avatars3.githubusercontent.com/u/14285531?s=460&v=4">
+            <img src="../../static/images/moonlight.jpg">
           </div>
         </a>
       </div>
@@ -22,6 +22,7 @@
         <p>7.购物车案例</p>
         <p>8.星星评分案例</p>
         <p>9.baseline底线</p>
+        <p>10.饿了么案例--开发中~~~</p>
       </div>
       
 

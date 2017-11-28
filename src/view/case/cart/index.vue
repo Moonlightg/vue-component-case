@@ -3,25 +3,25 @@
     <page-header title="购物车案例"/>
     <div id="CartIndex" class="content">
       <ul class="item_box item_fixed">
-        <li v-for="(good, index) in goods" v-waves>
-          <div class="item_radio" :class="{'check': good.checked}" @click="selectedGood(good)">
+        <li v-for="(cartgood, index) in cartgoods" v-waves>
+          <div class="item_radio" :class="{'check': cartgood.checked}" @click="selectedGood(cartgood)">
             <span></span>
           </div>
           <div class="item_img">
-            <img :src="good.img" alt=""/>
+            <img :src="cartgood.img" alt=""/>
           </div>
           <div class="item_l">
-            <b>{{ good.title }}</b>
-            <div><p>{{ good.price | formatMoney }}<span>/斤</span></p></div>
+            <b>{{ cartgood.title }}</b>
+            <div><p>{{ cartgood.price | formatMoney }}<span>/斤</span></p></div>
           </div>
           <div class="item_l">
             <div class="nc-prices">
-              <p class="price">{{ good.price*good.quantity | money('元') }}</p>
+              <p class="price">{{ cartgood.price*cartgood.quantity | money('元') }}</p>
             </div>
             <div class="nc-btnbox">
-              <button class="amount icon-reduce" @click="changeMoney(good,-1)" v-waves.center></button> 
-              <input type="number" :value="good.quantity" v-model="good.quantity" disabled>
-              <button class="amount icon-plus" @click="changeMoney(good,1)" v-waves.center></button>
+              <button class="amount icon-reduce" @click="changeMoney(cartgood,-1)" v-waves.center></button> 
+              <input type="number" :value="cartgood.quantity" v-model="cartgood.quantity" disabled>
+              <button class="amount icon-plus" @click="changeMoney(cartgood,1)" v-waves.center></button>
             </div>
           </div>
         </li>
@@ -55,7 +55,7 @@ export default {
   data () {
     return {
       totalMoney: 0,
-      goods: [
+      cartgoods: [
         { price: 45, title: '有机里脊肉', img: '././static/images/img01.jpg', quantity: 1 },
         { price: 55, title: '牛肋条', img: '././static/images/img02.jpg', quantity: 2 },
         { price: 65, title: '智利肋排脆骨', img: '././static/images/img03.jpg', quantity: 1 },
@@ -72,25 +72,25 @@ export default {
   },
   methods: {
     // 控制+-改变单个商品的总价，通过判断way的值控制最少为1件
-    changeMoney (good, way) {
+    changeMoney (cartgood, way) {
       if (way > 0) {
-        good.quantity++
+        cartgood.quantity++
       } else {
-        good.quantity--
-        if (good.quantity < 1) {
-          good.quantity = 1
+        cartgood.quantity--
+        if (cartgood.quantity < 1) {
+          cartgood.quantity = 1
         }
       }
       this.calcTotalPrice()
     },
-    selectedGood (good) {
-      // 点击时判断对象里面的变量good.checked是否存在,
-      if (typeof good.checked === 'undefined') {
+    selectedGood (cartgood) {
+      // 点击时判断对象里面的变量cartgood.checked是否存在,
+      if (typeof cartgood.checked === 'undefined') {
         // 通过 $set 往good注册一个checked并赋值为true
-        this.$set(good, 'checked', true)
+        this.$set(cartgood, 'checked', true)
       } else {
         // 再点击，取反
-        good.checked = !good.checked
+        cartgood.checked = !cartgood.checked
       }
       this.calcTotalPrice()
     },
@@ -98,12 +98,12 @@ export default {
       // flag传一个属性true,false
       this.checkAllFlag = flag
       var _this = this
-      this.goods.forEach(function (good, index) {
+      this.goods.forEach(function (cartgood, index) {
         // 遍历商品列表
-        if (typeof good.checked === 'undefined' && _this.checkAllFlag) {
-          _this.$set(good, 'checked', _this.checkAllFlag)
+        if (typeof cartgood.checked === 'undefined' && _this.checkAllFlag) {
+          _this.$set(cartgood, 'checked', _this.checkAllFlag)
         } else {
-          good.checked = _this.checkAllFlag
+          cartgood.checked = _this.checkAllFlag
         }
       })
       this.calcTotalPrice()
@@ -112,16 +112,16 @@ export default {
       var _this = this
       // 重置每一次总价为0
       this.totalMoney = 0
-      this.goods.forEach(function (good, index) {
-        if (good.checked) {
-          _this.totalMoney += good.price * good.quantity
+      this.cartgoods.forEach(function (cartgood, index) {
+        if (cartgood.checked) {
+          _this.totalMoney += cartgood.price * cartgood.quantity
         }
       })
     }
   }// ,
   // created () {
-  //  this.$http.get('/api/goods').then((data) => {
-  //    this.goods = data.body.data
+  //  this.$http.get('/api/cartgoods').then((data) => {
+  //    this.cartgoods = data.body.data
   //  })
   // }
 }

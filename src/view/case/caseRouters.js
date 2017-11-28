@@ -2,6 +2,7 @@ import Case from './Case'
 import baselineRoutes from './baseline/routers'
 import starRoutes from './star/routers'
 import cartRoutes from './cart/routers'
+import elemeRoutes from './eleme/routers'
 
 const children = [
   {
@@ -11,13 +12,15 @@ const children = [
   },
   ...baselineRoutes.children,
   ...starRoutes.children,
-  ...cartRoutes.children
+  ...cartRoutes.children,
+  ...elemeRoutes.children
 ]
 
 const roots = [
   ...baselineRoutes.roots,
   ...starRoutes.roots,
-  ...cartRoutes.roots
+  ...cartRoutes.roots,
+  ...elemeRoutes.roots
 ]
 
 export default {

@@ -22,6 +22,12 @@
             <p>baseline</p>
           </router-link>
         </li>
+        <li>
+          <router-link :to="{path: '/eleme'}" v-waves>
+            <i class="icon-smile"/>
+            <p>eleme</p>
+          </router-link>
+        </li>
       </nav>
     </div>
     <page-footer active-tab="案例"/>

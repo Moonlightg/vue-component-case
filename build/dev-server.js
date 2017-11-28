@@ -27,12 +27,37 @@ const proxyTable = config.dev.proxyTable
 const app = express()
 
 const appData = require('../data.json')
+const cartgoods = appData.cartgoods
+const seller = appData.seller
 const goods = appData.goods
+const ratings = appData.ratings
 
 const apiRoutes = express.Router()
+
+apiRoutes.get('/cartgoods', function(req, res){
+  res.json({
+    data: cartgoods
+  })
+})
+
+apiRoutes.get('/seller', function(req, res){
+  res.json({
+    errno: 0,
+    data: seller
+  })
+})
+
 apiRoutes.get('/goods', function(req, res){
   res.json({
+    errno: 0,
     data: goods
+  })
+})
+
+apiRoutes.get('/ratings', function(req, res){
+  res.json({
+    errno: 0,
+    data: ratings
   })
 })
 
