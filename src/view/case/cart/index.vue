@@ -20,7 +20,7 @@
             </div>
             <div class="nc-btnbox">
               <button class="amount icon-reduce" @click="changeMoney(cartgood,-1)" v-waves.center></button> 
-              <input type="number" :value="cartgood.quantity" v-model="cartgood.quantity" disabled>
+              <input type="number" :value="cartgood.quantity" disabled>
               <button class="amount icon-plus" @click="changeMoney(cartgood,1)" v-waves.center></button>
             </div>
           </div>
@@ -98,7 +98,7 @@ export default {
       // flag传一个属性true,false
       this.checkAllFlag = flag
       var _this = this
-      this.goods.forEach(function (cartgood, index) {
+      this.cartgoods.forEach(function (cartgood, index) {
         // 遍历商品列表
         if (typeof cartgood.checked === 'undefined' && _this.checkAllFlag) {
           _this.$set(cartgood, 'checked', _this.checkAllFlag)

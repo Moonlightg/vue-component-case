@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ele-box">
     我是seller
   </div>
 </template>

@@ -43,5 +43,6 @@ let routes = [
 ]
 
 export default new Router({
+  linkActiveClass: 'active',
   routes
 })

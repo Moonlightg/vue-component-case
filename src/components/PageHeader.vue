@@ -6,6 +6,7 @@
       <a class="return" v-if="showBackBtn" @click="back">
         <i class="icon-return" />
       </a>
+      <slot name="return"/>
       <!--标题-->
       <h1 v-if="title" class="nav_title"><p>{{title}}</p></h1>
       <slot v-if="!title" name="title"/>

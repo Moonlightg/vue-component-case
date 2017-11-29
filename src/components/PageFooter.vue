@@ -25,7 +25,7 @@ export default {
       menus: [
         {name: '首页', href: '#/', icon: 'icon-home', icons: 'icon-home-fill'},
         {name: '案例', href: '#/case', icon: 'icon-favor', icons: 'icon-favor-fill'},
-        {name: '商品', href: '#/two', icon: 'icon-community', icons: 'icon-community-fill'},
+        {name: '文档', href: '#/two', icon: 'icon-community', icons: 'icon-community-fill'},
         {name: 'Ui', href: '#/ui', icon: 'icon-community', icons: 'icon-community-fill'}
       ]
     }

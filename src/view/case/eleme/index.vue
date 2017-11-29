@@ -1,16 +1,21 @@
 <template>
   <div class="container">
-    <page-header title="饿了么案例"/>
+    <page-header :showBackBtn="false">
+      <a class="return" slot="return" @click="backreturn">
+        <i class="icon-return"/>
+      </a>
+      <h1 class="nav_title" slot="title"><p>饿了么案例</p></h1>
+    </page-header>
     <div id="ElemeIndex" class="content">
       <ele-header :seller="seller"></ele-header>
-      <div class="tab border-1px">
-        <div class="tab-item">
+      <div class="ele-tab border-1px">
+        <div class="ele-tab-item">
           <router-link to="eleme">商品</router-link>
         </div>
-        <div class="tab-item">
+        <div class="ele-tab-item">
           <router-link to="ratings">评论</router-link>
         </div>
-        <div class="tab-item">
+        <div class="ele-tab-item">
           <router-link to="seller">商家</router-link>
         </div>
       </div>
@@ -48,6 +53,10 @@ export default {
     })
   },
   methods: {
+    backreturn: function () {
+      this.$router.push('/case')
+      this.$router.isBack = true
+    }
   }
 }
 </script>
