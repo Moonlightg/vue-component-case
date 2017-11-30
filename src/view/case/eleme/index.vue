@@ -21,7 +21,7 @@
       </div>
       <keep-alive>
         <transition name="slide-fade">
-          <router-view></router-view>
+          <router-view :seller="seller"></router-view>
         </transition>
       </keep-alive>
     </div>

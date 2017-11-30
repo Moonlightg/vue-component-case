@@ -33,7 +33,7 @@
                   </span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  
+                  <ele-cart-control @add="addFood" :food="food"></ele-cart-control>
                 </div>
               </div>
             </li>
@@ -43,16 +43,23 @@
       </ul>
     </div>
     <!-- 购物车 -->
-
+    <!-- deliverPrice:商家配送费,minPrice:起送费 通过props中的seller来传递,路由容器中也要定义：seller="seller",ref="elecart"-->
+    <ele-cart ref="elecart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice"
+                :minPrice="seller.minPrice"></ele-cart>
   </div>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
+import EleCart from '../components/EleCart'
+import EleCartControl from '../components/EleCartControl'
 
 const ERR_OK = 0
 export default {
   props: {
+    seller: {
+      type: Object
+    }
   },
   data () {
     return {
@@ -78,6 +85,19 @@ export default {
         }
       }
       return 0
+    },
+    // 调用ele-cart组件的时候需要引用selectFooods的计算属性,
+    selectFoods () {
+      let foods = []
+      // 通过forEach遍历good,在遍历good下面的food
+      this.goods.forEach((good) => {
+        good.foods.forEach((food) => {
+          if (food.count) {
+            foods.push(food)
+          }
+        })
+      })
+      return foods
     }
   },
   created () {
@@ -147,9 +167,20 @@ export default {
       let menuList = this.$refs.menuList
       let el = menuList[index]
       this.menuScroll.scrollToElement(el, 300, 0, -100)
+    },
+    addFood (target) {
+      this._drop(target)
+    },
+    _drop (target) {
+      // 体验优化，异步执行下落动画,快速点击两下动画缓冲,调用EleCart中的drop方法，通过$refs.elecart访问子组件ele-cart并且传入target
+      this.$nextTick(() => {
+        this.$refs.elecart.drop(target)
+      })
     }
   },
   components: {
+    EleCart,
+    EleCartControl
   }
 }
 </script>
