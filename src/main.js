@@ -7,6 +7,7 @@ import VueResource from 'vue-resource'
 import { sync } from 'vuex-router-sync'
 import PageHeader from './components/PageHeader'
 import PageFooter from './components/PageFooter'
+import PageSplit from './components/PageSplit'
 import ActionSheet from './ActionSheet'
 import Star from './components/star/star'
 import VueEvents from 'vue-events'
@@ -37,6 +38,8 @@ sync(store, router)
 Vue.component('page-header', PageHeader)
 
 Vue.component('page-footer', PageFooter)
+
+Vue.component('page-split', PageSplit)
 
 Vue.component('action-sheet', ActionSheet)
 Vue.use(ActionSheetPlugin)

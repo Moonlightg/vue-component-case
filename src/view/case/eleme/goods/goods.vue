@@ -1,51 +1,54 @@
 <template>
-  <div class="ele-box ele-goods">
-    <!-- 左侧菜单 -->
-    <div class="menu-wrapper" ref="menuWrapper">
-      <ul>
-        <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)">
-          <span class="text border-1px">
-            <span class="icon" v-show="item.type>0" :class="classMap[item.type]"></span>{{item.name}}
-          </span>
-        </li>
-      </ul>
-    </div>
-    <!-- 右侧商品 -->
-    <div class="foods-wrapper" ref="foodsWrapper">
-      <ul>
-        <li v-for="item in goods" ref="foodList">
-          <h1 class="title">{{item.name}}</h1>
+  <div>
+    <div class="ele-box ele-goods">
+      <!-- 左侧菜单 -->
+      <div class="menu-wrapper" ref="menuWrapper">
+        <ul>
+          <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)">
+            <span class="text border-1px">
+              <span class="icon" v-show="item.type>0" :class="classMap[item.type]"></span>{{item.name}}
+            </span>
+          </li>
+        </ul>
+      </div>
+      <!-- 右侧商品 -->
+      <div class="foods-wrapper" ref="foodsWrapper">
+        <ul>
+          <li v-for="item in goods" ref="foodList">
+            <h1 class="title">{{item.name}}</h1>
 
-          <ul>
-            <li v-for="food in item.foods" class="food-item border-1px">
-              <div class="icon">
-                <img width="57" height="57" :src="food.icon">
-              </div>
-              <div class="ele-content">
-                <h2 class="name">{{food.name}}</h2>
-                <p class="desc">{{food.description}}</p>
-                <div class="extra">
-                  <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
+            <ul>
+              <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item border-1px">
+                <div class="icon">
+                  <img width="57" height="57" :src="food.icon">
                 </div>
-                <div class="price">
-                  <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">
-                    ￥{{food.oldPrice}}
-                  </span>
+                <div class="ele-content">
+                  <h2 class="name">{{food.name}}</h2>
+                  <p class="desc">{{food.description}}</p>
+                  <div class="extra">
+                    <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
+                  </div>
+                  <div class="price">
+                    <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">
+                      ￥{{food.oldPrice}}
+                    </span>
+                  </div>
+                  <div class="cartcontrol-wrapper">
+                    <ele-cart-control @add="addFood" :food="food"></ele-cart-control>
+                  </div>
                 </div>
-                <div class="cartcontrol-wrapper">
-                  <ele-cart-control @add="addFood" :food="food"></ele-cart-control>
-                </div>
-              </div>
-            </li>
-          </ul>
-          
-        </li>
-      </ul>
+              </li>
+            </ul>
+            
+          </li>
+        </ul>
+      </div>
+      <!-- 购物车 -->
+      <!-- deliverPrice:商家配送费,minPrice:起送费 通过props中的seller来传递,路由容器中也要定义：seller="seller",ref="elecart"-->
+      <ele-cart ref="elecart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice"
+                  :minPrice="seller.minPrice"></ele-cart>
     </div>
-    <!-- 购物车 -->
-    <!-- deliverPrice:商家配送费,minPrice:起送费 通过props中的seller来传递,路由容器中也要定义：seller="seller",ref="elecart"-->
-    <ele-cart ref="elecart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice"
-                :minPrice="seller.minPrice"></ele-cart>
+    <ele-food @add="addFood" :food="selectedFood" ref="food"></ele-food>
   </div>
 </template>
 
@@ -53,6 +56,7 @@
 import BScroll from 'better-scroll'
 import EleCart from '../components/EleCart'
 import EleCartControl from '../components/EleCartControl'
+import EleFood from '../components/EleFood'
 
 const ERR_OK = 0
 export default {
@@ -68,7 +72,8 @@ export default {
       // 定义一个数组存放右侧商品每一个区间的高度
       listHeight: [],
       // 映射左侧高度
-      scrollY: 0
+      scrollY: 0,
+      selectedFood: {}
     }
   },
   computed: {
@@ -129,6 +134,16 @@ export default {
       let el = foodList[index]
       this.foodsScroll.scrollToElement(el, 300)
     },
+    // 右侧商品li点击事件
+    selectFood (food, event) {
+      if (!event._constructed) {
+        return
+      }
+      // 选中food li
+      this.selectedFood = food
+      // 通过ref拿到子组件food并且调用它的show()方法
+      this.$refs.food.show()
+    },
     // 初始化一个_initScroll,用来获取要滚动的DOM
     _initScroll () {
       // 拿到左侧DOM,通过ref="menuWrapper",
@@ -180,7 +195,8 @@ export default {
   },
   components: {
     EleCart,
-    EleCartControl
+    EleCartControl,
+    EleFood
   }
 }
 </script>

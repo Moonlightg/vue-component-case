@@ -1,46 +1,67 @@
 <template>
-  <div class="ele-cart">
-  	<div class="ele-content">
-  	  <div class="content-left">
-  	  	<div class="logo-wrapper">
-  	  	  <div class="logo" :class="{'highlight':totalCount>0}">
-            <i class="icon-cart" :class="{'highlight':totalCount>0}"></i>  
-          </div>
-          <!-- 选择的商品数量大于0是显示 -->
-          <div class="num" v-show="totalCount>0">{{totalCount}}</div>
-  	  	</div>
-        <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
-        <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
-  	  </div>
-  	  <div class="content-right">
-        <div class="pay" :class="payClass">
-          {{payDesc}}
-        </div> 
-      </div>
-  	</div>
-    <!-- 抛物线小球 -->
-    <div class="ball-container">
-      <div v-for="ball in balls">
-        <transition name="drop" @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
-          <div class="ball" v-show="ball.show">
-            <div class="inner inner-hook"></div>
-          </div>
-        </transition>
-      </div>
-    </div>
-
-<!--     <div class="ball-container">
-      <div class="">
-        <div class="ball">
-          <div class="inner inner-hook"></div>
+  <div>
+    <div class="ele-cart">
+    	<div class="ele-content">
+    	  <div class="content-left" @click="toggleList">
+    	  	<div class="logo-wrapper">
+    	  	  <div class="logo" :class="{'highlight':totalCount>0}">
+              <i class="icon-cart" :class="{'highlight':totalCount>0}"></i>  
+            </div>
+            <!-- 选择的商品数量大于0是显示 -->
+            <div class="num" v-show="totalCount>0">{{totalCount}}</div>
+    	  	</div>
+          <div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
+          <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
+    	  </div>
+    	  <div class="content-right" @click="pay">
+          <div class="pay" :class="payClass">
+            {{payDesc}}
+          </div> 
+        </div>
+    	</div>
+      <!-- 抛物线小球 -->
+      <div class="ball-container">
+        <div v-for="ball in balls">
+          <transition name="drop" @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
+            <div class="ball" v-show="ball.show">
+              <div class="inner inner-hook"></div>
+            </div>
+          </transition>
         </div>
       </div>
-    </div> -->
-
+      <!-- 购物车列表 -->
+      <transition name="fold">
+        <div class="shopcart-list" v-show="listShow">
+          <div class="list-header">
+            <h1 class="title">购物车</h1>
+            <span class="empty" @click="empty">清空</span>
+          </div>
+          <div class="list-content" ref="listContent">
+            <ul>
+              <li class="food" v-for="food in selectFoods">
+                <span class="name">{{food.name}}</span>
+                <div class="price">
+                  <span>￥{{food.price*food.count}}</span>
+                </div>
+                <div class="cartcontrol-wrapper">
+                  <ele-cart-control @add="addFood" :food="food"></ele-cart-control>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </transition>
+    </div>
+    <transition name="fade">
+      <div class="list-mask" @click="hideList" v-show="listShow"></div>
+    </transition>
   </div>
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
+  import EleCartControl from './EleCartControl'
+
   export default {
     props: {
       // 父组件传商品数组
@@ -67,6 +88,9 @@
         default: 0
       }
     },
+    components: {
+      EleCartControl
+    },
     data () {
       return {
         balls: [
@@ -87,7 +111,9 @@
           }
         ],
         // 已经下落的小球
-        dropBalls: []
+        dropBalls: [],
+        // 购物车列表的true
+        fold: true
       }
     },
     computed: {
@@ -127,6 +153,26 @@
         } else {
           return 'enough'
         }
+      },
+      // 计算购物是否为空，不为空显示
+      listShow () {
+        if (!this.totalCount) {
+          this.fold = true
+          return false
+        }
+        let show = !this.fold
+        if (show) {
+          this.$nextTick(() => {
+            if (!this.scroll) {
+              this.scroll = new BScroll(this.$refs.listContent, {
+                click: true
+              })
+            } else {
+              this.scroll.refresh()
+            }
+          })
+        }
+        return show
       }
     },
     methods: {
@@ -143,6 +189,28 @@
             return
           }
         }
+      },
+      toggleList () {
+        // 如果等于0,返回,点击没反应
+        if (!this.totalCount) {
+          return
+        }
+        this.fold = !this.fold
+      },
+      hideList () {
+        this.fold = true
+      },
+      empty () {
+        // 遍历所有food,设为0则清空
+        this.selectFoods.forEach((food) => {
+          food.count = 0
+        })
+      },
+      pay () {
+        if (this.totalPrice < this.minPrice) {
+          return
+        }
+        window.alert(`支付${this.totalPrice}元`)
       },
       addFood (target) {
         this.drop(target)
