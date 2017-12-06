@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { urlParse } from './common/js/util'
 import EleHeader from './components/EleHeader'
 const ERR_OK = 0
 export default {
@@ -41,11 +42,18 @@ export default {
   data () {
     return {
       // 定义seller用来接收数据
-      seller: {}
+      seller: {
+        // 接受id
+        id: (() => {
+          let queryParam = urlParse()
+          return queryParam.id
+        })()
+      }
     }
   },
   created () {
-    this.$http.get('/api/seller').then((response) => {
+    // + '?id=' + this.seller.id来获取每个商家的id
+    this.$http.get('/api/seller' + '?id=' + this.seller.id).then((response) => {
       response = response.body
       if (response.errno === ERR_OK) {
         this.seller = Object.assign({}, this.seeler, response.data)

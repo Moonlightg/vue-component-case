@@ -1,6 +1,6 @@
 <template>
-  <div class="ele-box ele-ratings">
-    <div ref="ratingsWrapper">
+  <div class="ele-box no-bottom">
+    <div class="ele-ratings" ref="ratingsWrapper">
       <div class="ratings-content">
         <div class="overview">
           <div class="overview-left">
