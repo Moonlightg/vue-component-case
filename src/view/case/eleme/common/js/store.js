@@ -1,3 +1,4 @@
+// 存储api
 export function saveToLocal (id, key, value) {
   let seller = window.localStorage.__seller__
   if (!seller) {
@@ -12,7 +13,7 @@ export function saveToLocal (id, key, value) {
   seller[id][key] = value
   window.localStorage.__seller__ = JSON.stringify(seller)
 }
-
+// 读取api
 export function loadFromLocal (id, key, def) {
   let seller = window.localStorage.__seller__
   if (!seller) {

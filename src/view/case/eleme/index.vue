@@ -19,11 +19,12 @@
           <router-link to="seller">商家</router-link>
         </div>
       </div>
-      <keep-alive>
-        <transition name="slide-fade">
+      <transition name="slide-fade">
+        <keep-alive>
           <router-view :seller="seller"></router-view>
-        </transition>
-      </keep-alive>
+        </keep-alive>
+      </transition>
+      
     </div>
   </div>
 </template>
@@ -46,6 +47,7 @@ export default {
         // 接受id
         id: (() => {
           let queryParam = urlParse()
+          // console.log(queryParam)
           return queryParam.id
         })()
       }
@@ -53,15 +55,16 @@ export default {
   },
   created () {
     // + '?id=' + this.seller.id来获取每个商家的id
-    this.$http.get('/api/seller' + '?id=' + this.seller.id).then((response) => {
+    this.$http.get('/api/seller?id' + this.seller.id).then((response) => {
       response = response.body
       if (response.errno === ERR_OK) {
-        this.seller = Object.assign({}, this.seeler, response.data)
+        // this.seller = response.data
+        this.seller = Object.assign({}, this.seller, response.data)
       }
     })
   },
   methods: {
-    backreturn: function () {
+    backreturn () {
       this.$router.push('/case')
       this.$router.isBack = true
     }
