@@ -1381,5 +1381,32 @@
       "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png",
       "recommend": []
     }
-  ]
+  ],
+  "bannerList": [{
+    "bn_id": "13",
+    "bn_img": "https://s.xuelele.10155.com//resource//xll//Banner//2017-10-31//59f7d163275a8_crop.jpg",
+    "bn_url": "http://xuelele.dsmake.com//front//Wap//Course//info?oc_id=59",
+    "bn_order": "0",
+    "bn_position": "0",
+    "bn_type": "0",
+    "bn_status": "0",
+    "bn_start_time": "0",
+    "bn_end_time": "0",
+    "bn_create_time": "1509413227",
+    "bn_update_time": "1509437501",
+    "STATUS": "0"
+  }, {
+    "bn_id": "14",
+    "bn_img": "https://s.xuelele.10155.com//resource//xll//Banner//2017-10-31//59f7da9e0e727_crop.png",
+    "bn_url": "http://xuelele.dsmake.com//front//Wap//Course//info?oc_id=61",
+    "bn_order": "1",
+    "bn_position": "0",
+    "bn_type": "0",
+    "bn_status": "0",
+    "bn_start_time": "0",
+    "bn_end_time": "0",
+    "bn_create_time": "1509415803",
+    "bn_update_time": "1509437520",
+    "STATUS": "0"
+  }]
 }

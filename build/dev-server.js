@@ -31,6 +31,7 @@ const cartgoods = appData.cartgoods
 const seller = appData.seller
 const goods = appData.goods
 const ratings = appData.ratings
+const bannerList = appData.bannerList
 
 const apiRoutes = express.Router()
 
@@ -58,6 +59,13 @@ apiRoutes.get('/ratings', function(req, res){
   res.json({
     errno: 0,
     data: ratings
+  })
+})
+
+apiRoutes.get('/bannerList', function(req, res){
+  res.json({
+    errno: 0,
+    data: bannerList
   })
 })
 
