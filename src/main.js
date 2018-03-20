@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
+import axios from 'axios'
 import { sync } from 'vuex-router-sync'
 import PageHeader from './components/PageHeader'
 import PageFooter from './components/PageFooter'
@@ -19,6 +20,9 @@ import '../static/styles/base.less'
 import store from './store'
 
 Vue.config.productionTip = false
+
+Vue.prototype.$ajax = axios
+
 // 全局过滤器
 Vue.filter('money', function (value, type) {
   return '¥' + value.toFixed(2) + type
@@ -35,6 +39,7 @@ Vue.use(ScmWavesPlugin)
 sync(store, router)
 
 /* eslint-disable no-new */
+
 Vue.component('page-header', PageHeader)
 
 Vue.component('page-footer', PageFooter)

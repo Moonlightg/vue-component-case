@@ -1382,7 +1382,8 @@
       "recommend": []
     }
   ],
-  "bannerList": [{
+  "bannerList": [
+    {
     "bn_id": "13",
     "bn_img": "https://s.xuelele.10155.com//resource//xll//Banner//2017-10-31//59f7d163275a8_crop.jpg",
     "bn_url": "http://xuelele.dsmake.com//front//Wap//Course//info?oc_id=59",
@@ -1395,7 +1396,8 @@
     "bn_create_time": "1509413227",
     "bn_update_time": "1509437501",
     "STATUS": "0"
-  }, {
+    }, 
+    {
     "bn_id": "14",
     "bn_img": "https://s.xuelele.10155.com//resource//xll//Banner//2017-10-31//59f7da9e0e727_crop.png",
     "bn_url": "http://xuelele.dsmake.com//front//Wap//Course//info?oc_id=61",

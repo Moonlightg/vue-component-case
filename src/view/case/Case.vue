@@ -28,6 +28,12 @@
             <p>eleme</p>
           </router-link>
         </li>
+        <li>
+          <router-link :to="{path: 'case/xuelele/index'}" v-waves>
+            <i class="icon-account"/>
+            <p>学乐乐</p>
+          </router-link>
+        </li>
       </nav>
     </div>
     <page-footer active-tab="案例"/>

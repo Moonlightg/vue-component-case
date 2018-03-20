@@ -1,6 +1,11 @@
 <template>
-  <div id="Two">
-    <page-header :showBackBtn="false" title="文档"/>
+  <div class="container">
+    <page-header :showBackBtn="false">
+      <a class="return" slot="return" @click="backreturn">
+        <i class="icon-return"/>
+      </a>
+      <h1 class="nav_title" slot="title"><p>学乐乐案例</p></h1>
+    </page-header>
     <div class="content">
       <div class="product_list">
         <ul>
@@ -24,20 +29,23 @@
         </ul>
       </div>
     </div>
-    <page-footer active-tab="文档"/>
+    <xue-footer active-tab="首页"></xue-footer>
   </div>
 </template>
 
 <script>
+import XueFooter from './components/XueFooter'
 const ERR_OK = 0
 export default {
-  name: 'Two',
+  components: {
+    XueFooter
+  },
+  computed: {
+  },
   data () {
     return {
       bannerList: []
     }
-  },
-  components: {
   },
   created () {
     // 获取goods数据
@@ -48,6 +56,12 @@ export default {
         console.log('成功')
       }
     })
+  },
+  methods: {
+    backreturn () {
+      this.$router.push('/case')
+      this.$router.isBack = true
+    }
   }
 }
 </script>
@@ -56,3 +70,4 @@ export default {
   width: 100%;
 }
 </style>
+
