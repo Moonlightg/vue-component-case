@@ -4,7 +4,7 @@
       <!--底部页面链接-->
       <ul>
         <li v-for="menu in menus" v-waves.block>
-          <a :href="menu.href" :class="[activeTab === menu.name ? 'column current': 'column']">
+          <a :href="menu.href" :class="[activeTab === menu.name ? 'column x-current': 'column']">
             <!--字体图标-->
             <span :class="[activeTab === menu.name ? menu.icons : menu.icon]">
               <!--消息提醒-->

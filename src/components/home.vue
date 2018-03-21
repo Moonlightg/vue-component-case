@@ -57,3 +57,12 @@ export default {
   }
 }
 </script>
+<style type="text/css">
+  .home-wrapper{
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    bottom: 2.5rem;
+    left: 0;
+  }
+</style>
