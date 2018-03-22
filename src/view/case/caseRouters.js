@@ -4,6 +4,7 @@ import starRoutes from './star/routers'
 import cartRoutes from './cart/routers'
 import elemeRoutes from './eleme/routers'
 import xueleleRoutes from './xuelele/routers'
+import arcprogressRoutes from './arcprogress/routers'
 
 const children = [
   {
@@ -15,7 +16,8 @@ const children = [
   ...starRoutes.children,
   ...cartRoutes.children,
   ...elemeRoutes.children,
-  ...xueleleRoutes.children
+  ...xueleleRoutes.children,
+  ...arcprogressRoutes.children
 ]
 
 const roots = [
@@ -23,7 +25,8 @@ const roots = [
   ...starRoutes.roots,
   ...cartRoutes.roots,
   ...elemeRoutes.roots,
-  ...xueleleRoutes.roots
+  ...xueleleRoutes.roots,
+  ...arcprogressRoutes.roots
 ]
 
 export default {

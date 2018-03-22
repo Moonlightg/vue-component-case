@@ -34,6 +34,12 @@
             <p>学乐乐</p>
           </router-link>
         </li>
+        <li>
+          <router-link :to="{path: 'case/arcprogress/index'}" v-waves>
+            <i class="icon-account"/>
+            <p>圆弧进度条</p>
+          </router-link>
+        </li>
       </nav>
     </div>
     <page-footer active-tab="案例"/>
